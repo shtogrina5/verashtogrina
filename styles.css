@@ -1,0 +1,286 @@
+/* Вера Штогрина — портфолио. Размеры в "u": calc(1 * var(--u)) = 1px макета (десктоп 1200, мобилка 320). */
+@font-face {
+  font-family: "Roslindale";
+  src: url("fonts/roslindale-display-condensed-light-italic.woff2?v=0c5fe05c") format("woff2");
+  font-style: italic; font-weight: 300; font-display: swap;
+}
+/* Helvetica Neue — системный шрифт Apple (iPhone, iPad, Mac): берём его, если он есть */
+@font-face { font-family: "HNeue"; src: local("Helvetica Neue"), local("HelveticaNeue"); font-style: normal; font-weight: 400; }
+@font-face { font-family: "HNeue"; src: local("Helvetica Neue Light Italic"), local("HelveticaNeue-LightItalic"); font-style: italic; font-weight: 300; }
+/* Замена для Android / Windows — Inter, ужатый до ширины Helvetica, чтобы строки не вылезали */
+@font-face { font-family: "HNeueAlt"; src: url("fonts/inter-latin-400-normal.woff2?v=da03732a") format("woff2"); font-style: normal; font-weight: 400; font-display: swap; size-adjust: 93.5%; unicode-range: U+0000-00FF, U+2000-206F, U+20AC, U+2122; }
+@font-face { font-family: "HNeueAlt"; src: url("fonts/inter-cyrillic-400-normal.woff2?v=74a70a8b") format("woff2"); font-style: normal; font-weight: 400; font-display: swap; size-adjust: 93.5%; unicode-range: U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116; }
+@font-face { font-family: "HNeueAlt"; src: url("fonts/inter-latin-300-italic.woff2?v=ccbf01f5") format("woff2"); font-style: italic; font-weight: 300; font-display: swap; size-adjust: 97%; unicode-range: U+0000-00FF, U+2000-206F, U+20AC, U+2122; }
+@font-face { font-family: "HNeueAlt"; src: url("fonts/inter-cyrillic-300-italic.woff2?v=aa53a260") format("woff2"); font-style: italic; font-weight: 300; font-display: swap; size-adjust: 97%; unicode-range: U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116; }
+
+:root {
+  --u: calc(100vw / 1200);
+  --dark: #3d2d2e;
+  --blue: #a6b8d0;
+  --white: #f7f7f7;
+  --mid: #554a4b;
+  --serif: "Roslindale", "Times New Roman", serif;
+  --sans: "HNeue", "HNeueAlt", Helvetica, Arial, sans-serif;
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html, body { background: var(--dark); }
+body { overflow-x: hidden; -webkit-font-smoothing: antialiased; }
+a { color: inherit; text-decoration: none; }
+h1, h2, h3 { font: inherit; margin: 0; }
+.sr { position: absolute !important; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+.lnk { transition: opacity .2s ease; }
+.lnk:hover { opacity: .7; }
+a:focus-visible { outline: 2px solid var(--blue); outline-offset: 3px; }
+.btn::after { content: ""; position: absolute; inset: -8px; } /* больше зона нажатия, вид тот же */
+img { display: block; }
+
+.m { display: none; }
+@media (max-width: 767px) {
+  :root { --u: calc(100vw / 320); }
+  .d { display: none; }
+  .m { display: block; }
+}
+
+.sec { position: relative; width: 100%; overflow: hidden; }
+.abs { position: absolute; }
+.serif { font-family: var(--serif); font-style: italic; font-weight: 300; }
+.sans { font-family: var(--sans); font-style: normal; font-weight: 400; }
+.light { font-family: var(--sans); font-style: italic; font-weight: 300; }
+.nw { white-space: nowrap; }
+.r { text-align: right; }
+.c { text-align: center; }
+.vline { position: absolute; width: 0; border-left: calc(1 * var(--u)) solid var(--blue); }
+.hline { position: absolute; height: 0; border-top: calc(1 * var(--u)) solid var(--blue); }
+.crop { position: absolute; overflow: hidden; }
+.crop > img { position: absolute; max-width: none; }
+.cover { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+.hl { color: var(--dark); }
+/* голубые плашки — отдельные прямоугольники точно по координатам из Figma */
+.hlr { position: absolute; background: var(--blue); }
+
+/* ============ DESKTOP ============ */
+.d .hero { height: calc(600 * var(--u)); background: var(--dark); }
+.d .hero .nav { top: calc(45 * var(--u)); font-size: calc(20 * var(--u)); letter-spacing: calc(-0.2 * var(--u)); color: var(--white); line-height: normal; }
+.d .hero .photo { left: calc(60 * var(--u)); top: calc(174 * var(--u)); width: calc(327 * var(--u)); height: calc(365 * var(--u)); border: calc(1 * var(--u)) solid var(--blue); }
+.d .hero .photo img { inset: 0; width: 100%; height: 100%; object-fit: cover; }
+.d .hero .t1 { left: calc(498 * var(--u)); top: calc(174 * var(--u)); font-size: calc(140 * var(--u)); letter-spacing: calc(-2.8 * var(--u)); line-height: 1.15; color: var(--blue); }
+.d .hero .t2 { left: calc(498 * var(--u)); top: calc(279 * var(--u)); font-size: calc(120 * var(--u)); letter-spacing: calc(-2.4 * var(--u)); line-height: 1.15; color: var(--white); }
+.btn { display: block; position: absolute; background: var(--blue); cursor: pointer; }
+.btn .in { position: absolute; border: solid #000; }
+.btn .lbl { position: absolute; left: 0; right: 0; text-align: center; color: #000; white-space: nowrap; line-height: 1.06; }
+.d .hero .btn { left: calc(498 * var(--u)); top: calc(488 * var(--u)); width: calc(169 * var(--u)); height: calc(51 * var(--u)); }
+.d .hero .btn .in { left: calc(3 * var(--u)); top: calc(3 * var(--u)); width: calc(163 * var(--u)); height: calc(45 * var(--u)); border-width: calc(1 * var(--u)); }
+.d .hero .btn .lbl { top: calc(15 * var(--u)); font-size: calc(20 * var(--u)); letter-spacing: calc(-0.4 * var(--u)); }
+
+.d .about { height: calc(600 * var(--u)); background: var(--dark); }
+.d .about .bg { left: 0; top: 0; width: calc(1200 * var(--u)); height: calc(600 * var(--u)); }
+.d .about .txt { font-size: calc(20 * var(--u)); letter-spacing: calc(-0.4 * var(--u)); line-height: 1.15; color: var(--white); }
+.d .about .big { top: calc(341 * var(--u)); font-size: calc(210 * var(--u)); letter-spacing: calc(-8.4 * var(--u)); line-height: 1.15; color: var(--blue); }
+
+.help-track { position: relative; background: var(--blue); }
+.d .help-track { height: calc(calc(600 * var(--u)) + 350vh); height: calc(calc(600 * var(--u)) + 350lvh); }
+.m .help-track { height: 400vh; height: calc(100svh + 280lvh); }
+.help-stage { position: sticky; top: 0; overflow: hidden; background: var(--blue); }
+.d .help-stage { height: calc(600 * var(--u)); }
+.d .help .q1 { left: calc(533 * var(--u)); top: calc(182 * var(--u)); transform: translateX(-50%); font-size: calc(140 * var(--u)); letter-spacing: calc(-5.6 * var(--u)); line-height: 0.84; color: var(--dark); }
+.q1 .g { color: var(--mid); }
+.d .help .q2 { left: calc(498 * var(--u)); top: calc(241 * var(--u)); font-size: calc(210 * var(--u)); letter-spacing: calc(-8.4 * var(--u)); line-height: 1.15; color: var(--dark); }
+.d .help .ln { left: 0; top: calc(385 * var(--u)); width: calc(447.5 * var(--u)); border-top: calc(1 * var(--u)) solid var(--mid); }
+.d .help .sq { left: calc(425 * var(--u)); top: calc(373 * var(--u)); width: calc(23 * var(--u)); height: calc(23 * var(--u)); background: var(--mid); }
+.card { position: absolute; }
+.js .card { transform: translateY(200%); }
+.card .frame { background: #faf8f2; position: absolute; inset: 0; }
+.card .frame img { width: 100%; height: 100%; object-fit: cover; }
+.card .ct, .card .cn { color: var(--dark); line-height: 0.98; }
+.card .cb { color: #000; line-height: 1.15; }
+.d .card { left: calc(248 * var(--u)); top: calc(58 * var(--u)); width: calc(704 * var(--u)); height: calc(470 * var(--u)); }
+.d .card .ct { left: calc(100 * var(--u)); top: calc(108 * var(--u)); font-size: calc(40 * var(--u)); letter-spacing: calc(-0.8 * var(--u)); }
+.d .card .cn { top: calc(118 * var(--u)); font-size: calc(20 * var(--u)); letter-spacing: calc(-0.4 * var(--u)); }
+.d .card .cb { left: calc(100 * var(--u)); font-size: calc(20 * var(--u)); letter-spacing: calc(-0.4 * var(--u)); }
+
+.d .base { height: calc(600 * var(--u)); background: var(--dark); }
+.d .base .n40 { left: calc(73 * var(--u)); top: calc(71 * var(--u)); font-size: calc(210 * var(--u)); letter-spacing: calc(-8.4 * var(--u)); line-height: 1.15; color: var(--white); }
+.d .base .nb { left: calc(73 * var(--u)); top: calc(263 * var(--u)); width: calc(1038 * var(--u)); font-size: calc(140 * var(--u)); letter-spacing: calc(-5.6 * var(--u)); line-height: 0.84; color: var(--white); }
+.nick { position: absolute; background: var(--blue); color: var(--dark); white-space: nowrap; line-height: 1.15;
+        animation: nick var(--dur, 4s) ease-in-out var(--del, 0s) infinite alternate; }
+@keyframes nick { from { transform: translateY(calc(var(--a) * -1)); } to { transform: translateY(var(--a)); } }
+.d .nick { height: calc(11 * var(--u)); font-size: calc(10 * var(--u)); letter-spacing: calc(-0.2 * var(--u)); }
+.d .base .tbl { left: calc(780 * var(--u)); top: calc(340 * var(--u)); width: calc(320 * var(--u)); height: calc(206 * var(--u)); filter: blur(calc(4.55 * var(--u))); }
+.base .tbl img { inset: 0; width: 100%; height: 100%; }
+
+/* cases — стопка: каждый кейс прилипает, следующий наезжает сверху */
+.cases { position: relative; }
+.case { position: sticky; overflow: hidden; }
+.case .cin { position: absolute; inset: 0; }
+.case.light { background: var(--blue); color: var(--dark); }
+.case.dark { background: var(--dark); color: var(--blue); }
+.case .ph { position: absolute; overflow: hidden; }
+.case .ph img { position: absolute; opacity: 0; z-index: 0; }
+.case .ph img.on { opacity: 1; z-index: 2; transition: opacity .9s ease; }
+.case .ph img.was { opacity: 1; z-index: 1; }
+.case .ph img.fit { inset: 0; width: 100%; height: 100%; object-fit: cover; }
+.case.light .ph { border-color: var(--dark); }
+.case.dark .ph { border-color: var(--blue); }
+.case .badge { position: absolute; }
+.case.light .badge { background: var(--dark); }
+.case.dark .badge { background: var(--blue); }
+.case .rl { position: absolute; height: 0; border-top-style: solid; }
+.case.light .rl { border-top-color: var(--dark); }
+.case.dark .rl { border-top-color: var(--blue); }
+.case .more { position: absolute; inset: 0; }
+/* «Моя роль», пункты и второе фото выезжают, когда кейс доходит до середины экрана */
+.js .case .more > * { opacity: 0; transform: translateY(calc(16 * var(--u))); transition: opacity .3s ease, transform .3s ease; }
+.js .case .more > .ph2 { transform: translateY(calc(40 * var(--u))); }
+.js .case.open .more > * { opacity: 1; transform: none;
+  transition: opacity .55s cubic-bezier(.22,1,.36,1) var(--d, 0ms), transform .75s cubic-bezier(.22,1,.36,1) var(--d, 0ms); }
+.js .case.open .more > .ph2 { --d: 180ms; }
+
+.d .case { height: calc(940 * var(--u)); top: min(0px, calc(100vh - calc(940 * var(--u)))); top: min(0px, calc(100lvh - calc(940 * var(--u)))); }
+.d .case .lab { top: calc(73 * var(--u)); font-size: calc(40 * var(--u)); letter-spacing: calc(-0.8 * var(--u)); line-height: 1.15; white-space: nowrap; }
+.d .case .sub { top: calc(73 * var(--u)); font-size: calc(20 * var(--u)); letter-spacing: calc(-0.4 * var(--u)); line-height: 1.15; }
+.d .case .ttl { top: calc(262 * var(--u)); width: calc(672 * var(--u)); font-size: calc(100 * var(--u)); letter-spacing: calc(-2 * var(--u)); line-height: 0.88; }
+.d .case .ph { width: calc(327 * var(--u)); height: calc(365 * var(--u)); border: calc(1 * var(--u)) solid; }
+.d .case .badge { top: calc(502 * var(--u)); width: calc(108 * var(--u)); height: calc(23 * var(--u)); }
+.d .case .bt { top: calc(502 * var(--u)); font-size: calc(20 * var(--u)); letter-spacing: calc(-0.4 * var(--u)); line-height: 1.15; white-space: nowrap; }
+.d .case.light .bt { color: var(--blue); }
+.d .case.dark .bt { color: var(--dark); }
+.d .case .rl { width: calc(672 * var(--u)); border-top-width: calc(1 * var(--u)); }
+.d .case .ri { font-size: calc(20 * var(--u)); letter-spacing: calc(-0.4 * var(--u)); line-height: 1.15; white-space: nowrap; }
+
+.d .foot { height: calc(500 * var(--u)); background: var(--dark); }
+.d .foot .bg { left: 0; top: 0; width: calc(1200 * var(--u)); height: calc(500 * var(--u)); }
+.d .foot .txt { font-size: calc(20 * var(--u)); letter-spacing: calc(-0.4 * var(--u)); line-height: 1.15; color: var(--white); }
+.d .foot .big { left: calc(30 * var(--u)); top: calc(234 * var(--u)); width: calc(1158 * var(--u)); font-size: calc(140 * var(--u)); letter-spacing: calc(-5.6 * var(--u)); line-height: 0.84; color: var(--white); }
+
+/* ============ MOBILE ============ */
+.m .hero { height: calc(525 * var(--u)); background: var(--dark); }
+.m .hero .vline, .m .hero .hline { border-width: calc(0.7 * var(--u)); }
+.m .hero .nav { top: calc(24 * var(--u)); font-size: calc(10 * var(--u)); letter-spacing: calc(-0.1 * var(--u)); color: var(--white); line-height: normal; }
+.m .hero .t1 { left: calc(162 * var(--u)); top: calc(84 * var(--u)); transform: translateX(-50%); font-size: calc(60 * var(--u)); letter-spacing: calc(-1.2 * var(--u)); line-height: 1.15; color: var(--blue); }
+.m .hero .t2 { left: calc(58 * var(--u)); top: calc(139 * var(--u)); font-size: calc(40 * var(--u)); letter-spacing: calc(-0.8 * var(--u)); line-height: 1.15; color: var(--white); }
+.m .hero .photo { left: calc(66 * var(--u)); top: calc(209 * var(--u)); width: calc(187 * var(--u)); height: calc(209 * var(--u)); border: calc(0.7 * var(--u)) solid var(--blue); }
+.m .hero .photo img { inset: 0; width: 100%; height: 100%; object-fit: cover; }
+.m .hero .btn { left: calc(81 * var(--u)); top: calc(438 * var(--u)); width: calc(157 * var(--u)); height: calc(44 * var(--u)); }
+.m .hero .btn .in { left: calc(2 * var(--u)); top: calc(2 * var(--u)); width: calc(153 * var(--u)); height: calc(40 * var(--u)); border-width: calc(0.7 * var(--u)); }
+.m .hero .btn .lbl { top: calc(11.5 * var(--u)); font-size: calc(20 * var(--u)); letter-spacing: calc(-0.4 * var(--u)); }
+
+.m .about { height: calc(429 * var(--u)); background: var(--dark); }
+.m .about .bgw { left: 0; top: calc(-70 * var(--u)); width: calc(320 * var(--u)); height: calc(569 * var(--u)); }
+.m .about .bgw .rot { position: absolute; left: 50%; top: 50%; width: calc(569 * var(--u)); height: calc(320 * var(--u)); transform: translate(-50%, -50%) rotate(-90deg); }
+.m .about .txt { font-size: calc(10 * var(--u)); letter-spacing: calc(-0.2 * var(--u)); line-height: 1.15; color: var(--white); }
+.m .about .big { top: calc(325 * var(--u)); height: calc(74 * var(--u)); font-size: calc(80 * var(--u)); letter-spacing: calc(-3.2 * var(--u)); line-height: 1.15; color: var(--blue); }
+
+.m .help-stage { height: 100vh; height: 100svh; }
+.m .hs-in { position: absolute; left: 0; width: 100%; top: 50%; height: calc(429 * var(--u)); margin-top: calc(-214.5 * var(--u)); }
+.m .help .q1 { left: calc(159.5 * var(--u)); top: calc(130 * var(--u)); width: calc(289 * var(--u)); transform: translateX(-50%); text-align: center; font-size: calc(60 * var(--u)); letter-spacing: calc(-2.4 * var(--u)); line-height: 0.84; color: var(--dark); }
+.m .help .q2 { left: calc(43 * var(--u)); top: calc(208 * var(--u)); font-size: calc(80 * var(--u)); letter-spacing: calc(-3.2 * var(--u)); line-height: 1.15; color: var(--dark); white-space: nowrap; }
+.m .help .ln { left: calc(160 * var(--u)); width: 0; border-left: calc(0.7 * var(--u)) solid var(--mid); }
+.m .help .sq { width: calc(10 * var(--u)); height: calc(10 * var(--u)); background: var(--mid); }
+.m .card { left: calc(15 * var(--u)); top: calc(111 * var(--u)); width: calc(290 * var(--u)); height: calc(194 * var(--u)); }
+.m .card .ct { left: 0; right: 0; top: calc(41 * var(--u)); text-align: center; font-size: calc(20 * var(--u)); letter-spacing: calc(-0.4 * var(--u)); }
+.m .card .cn { left: 0; right: 0; top: calc(22 * var(--u)); text-align: center; font-size: calc(10 * var(--u)); letter-spacing: calc(-0.2 * var(--u)); }
+.m .card .cb { left: 50%; transform: translateX(-50%); text-align: center; font-size: calc(10 * var(--u)); letter-spacing: calc(-0.2 * var(--u)); }
+
+.m .base { height: calc(525 * var(--u)); background: var(--dark); }
+.m .base .vline, .m .base .hline { border-width: calc(0.7 * var(--u)); }
+.m .base .n40 { left: calc(15 * var(--u)); top: calc(172 * var(--u)); font-size: calc(80 * var(--u)); letter-spacing: calc(-3.2 * var(--u)); line-height: 1.15; color: var(--white); }
+.m .base .nb { left: calc(15 * var(--u)); top: calc(253 * var(--u)); width: calc(305 * var(--u)); font-size: calc(60 * var(--u)); letter-spacing: calc(-2.4 * var(--u)); line-height: 0.84; color: var(--white); }
+.m .nick { height: calc(7 * var(--u)); font-size: calc(5 * var(--u)); letter-spacing: calc(-0.1 * var(--u)); }
+.m .base .tbl { left: calc(199 * var(--u)); top: calc(287 * var(--u)); width: calc(103 * var(--u)); height: calc(66 * var(--u)); filter: blur(calc(1.5 * var(--u))); }
+
+.m .case { height: calc(468 * var(--u)); top: min(0px, calc(100vh - calc(468 * var(--u)))); top: min(0px, calc(100lvh - calc(468 * var(--u)))); }
+.m .case .lab { left: calc(15 * var(--u)); top: calc(30 * var(--u)); width: calc(130 * var(--u)); font-size: calc(20 * var(--u)); letter-spacing: calc(-0.4 * var(--u)); line-height: 0.88; }
+.m .case .sub { left: calc(15 * var(--u)); top: calc(53 * var(--u)); font-size: calc(10 * var(--u)); letter-spacing: calc(-0.2 * var(--u)); line-height: 1.15; }
+.m .case .ttl { left: calc(15 * var(--u)); top: calc(140 * var(--u)); width: calc(130 * var(--u)); font-size: calc(20 * var(--u)); letter-spacing: calc(-0.4 * var(--u)); line-height: 0.88; }
+.m .case .ph { left: calc(198 * var(--u)); width: calc(107 * var(--u)); height: calc(146 * var(--u)); border: calc(0.7 * var(--u)) solid; }
+.m .case .badge { left: calc(15 * var(--u)); top: calc(206 * var(--u)); width: calc(46 * var(--u)); height: calc(12 * var(--u)); }
+.m .case .bt { left: calc(16 * var(--u)); top: calc(206 * var(--u)); font-size: calc(10 * var(--u)); letter-spacing: calc(-0.2 * var(--u)); line-height: 1.15; white-space: nowrap; }
+.m .case.light .bt { color: var(--blue); }
+.m .case.dark .bt { color: var(--dark); }
+.m .case .rl { left: calc(15 * var(--u)); width: calc(168 * var(--u)); border-top-width: calc(0.7 * var(--u)); }
+.m .case .ri { left: calc(15 * var(--u)); font-size: calc(10 * var(--u)); letter-spacing: calc(-0.2 * var(--u)); line-height: 1.15; }
+
+.m .foot { height: calc(334 * var(--u)); background: var(--blue); }
+.m .foot .bg { left: 0; top: 0; width: calc(320 * var(--u)); height: calc(334 * var(--u)); }
+.m .foot .txt { font-size: calc(10 * var(--u)); letter-spacing: calc(-0.2 * var(--u)); line-height: 1.15; color: var(--white); }
+.m .foot .big { left: calc(15 * var(--u)); top: calc(239 * var(--u)); width: calc(295 * var(--u)); font-size: calc(40 * var(--u)); letter-spacing: calc(-1.6 * var(--u)); line-height: 0.84; color: var(--white); }
+
+/* строки текста разбиты вручную как в Figma — не переносить автоматически */
+.lines { white-space: nowrap; }
+
+/* щадящий режим: если в системе отключена анимация */
+@media (prefers-reduced-motion: reduce) {
+  .nick { animation: none; }
+  .js .case .more > *, .js .case.open .more > * { opacity: 1; transform: none; transition: none; }
+  .case .ph img.on { transition: none; }
+  .lnk { transition: none; }
+}
+
+/* =================== АНИМАЦИИ =================== */
+:root { --ease-out: cubic-bezier(.22,1,.36,1); --ease-draw: cubic-bezier(.65,0,.35,1); }
+
+/* Маска строк: заголовки выезжают снизу из-за невидимого края (запас — чтобы не резались хвосты курсива) */
+.ml { display: block; overflow: hidden; padding: .1em .2em .22em .15em; margin: -.1em -.2em -.22em -.15em; }
+.mi { display: block; }
+.js .rv .mi, .js .rv-intro .mi { transform: translateY(115%); transition: transform .9s var(--ease-out) calc(var(--i, 0) * 90ms + var(--rd, 0ms)); }
+.js .rv.in .mi, .js .rv-intro.in .mi { transform: none; }
+
+/* ★ Голубые плашки «прокрашиваются» маркером по порядку чтения */
+.js .about .hlr { transform: scaleX(0); transform-origin: left; transition: transform .7s var(--ease-draw) var(--hd, 0ms); }
+.js .about.in .hlr { transform: none; }
+.js .about .hl { color: var(--white); transition: color .3s ease calc(var(--hd, 0ms) + 250ms); }
+.js .about.in .hl { color: var(--dark); }
+
+/* Первый экран: линии прорисовываются, фото проявляется шторкой, заголовок по маске, кнопка последней */
+.js .hero .vline { transform: scaleY(0); transform-origin: top; transition: transform .6s var(--ease-draw); }
+.js .hero .hline { transform: scaleX(0); transform-origin: left; transition: transform .6s var(--ease-draw) .1s; }
+.js .hero .photo img { clip-path: inset(0 0 100% 0); transition: clip-path .9s var(--ease-out) .25s; }
+.js .hero .nav { opacity: 0; transition: opacity .6s ease .3s; }
+.js .hero .t1 { --rd: 400ms; } .js .hero .t2 { --rd: 430ms; }
+.js .rv-intro .mi { transform: translateY(-115%); }
+.js .rv-intro.in .mi { transform: none; }
+.js .hero .btn { opacity: 0; transform: translateY(calc(-12 * var(--u))); transition: opacity .6s ease .8s, transform .6s var(--ease-out) .8s; }
+.js .hero.in .vline, .js .hero.in .hline { transform: none; }
+.js .hero.in .photo img { clip-path: inset(0); }
+.js .hero.in .nav { opacity: 1; }
+.js .hero.in .btn { opacity: 1; transform: none; }
+.js .m .hero .btn { transform: translateY(calc(-8 * var(--u))); }
+.js .m .hero.in .btn { transform: none; }
+
+/* Кнопка «Написать мне»: без эффектов при наведении */
+
+/* «Чем я могу быть полезна?» — заголовок по маске, когда экран въезжает */
+
+/* «40+»: сетка прочерчивается, цифра набегает, ники всплывают и начинают покачиваться */
+.js .base .plus { opacity: 0; transition: opacity .3s ease; }
+.js .base .plus.on { opacity: 1; }
+.cnt { font-variant-numeric: tabular-nums; }
+
+/* Кейсы: «Моя роль» — плашка прочерчивается, затем линейка пунктов 01, 02, 03… */
+.js .case .more > .badge { opacity: 1; transform: scaleX(0); transform-origin: left; transition: transform .25s ease; }
+.js .case.open .more > .badge { transform: none; transition: transform .6s var(--ease-draw); }
+.js .case .more > .bt { transition: opacity .2s ease; }
+.js .case.open .more > .bt { --d: 250ms; }
+.js .case .more > .rl { opacity: 1; transform: scaleX(0); transform-origin: left; transition: transform .25s ease; }
+.js .case.open .more > .rl { transform: none; transition: transform .5s var(--ease-draw) var(--d, 0ms); }
+
+/* Подвал и статичные надписи: без анимации текста */
+.js .about .big .mi, .js .base .mi { transform: none; transition: none; }
+.js .foot .mi { transform: none; transition: none; }
+
+/* Щадящий режим: всё сразу на месте */
+html.rm *, html.rm *::before, html.rm *::after { transition-duration: 0s !important; transition-delay: 0s !important; }
+
+/* Еле заметная «живая» зернистость на фото «Обо мне» и в подвале */
+.about .bg::after, .about .bgw::after, .foot .bg::after {
+  content: ""; position: absolute; inset: -60%; pointer-events: none; z-index: 3;
+  background: url("images/grain.png?v=ef047269") repeat; background-size: 180px 180px;
+  opacity: .09; mix-blend-mode: overlay;
+  animation: grain .9s steps(6) infinite;
+}
+.about .bg, .about .bgw, .foot .bg { overflow: hidden; }
+@keyframes grain {
+  0% { transform: translate(0, 0); } 17% { transform: translate(-4%, 3%); } 33% { transform: translate(3%, -5%); }
+  50% { transform: translate(-6%, -2%); } 67% { transform: translate(5%, 4%); } 83% { transform: translate(-2%, 6%); } 100% { transform: translate(0, 0); }
+}
+@media (prefers-reduced-motion: reduce) { .about .bg::after, .about .bgw::after, .foot .bg::after { animation: none; } }
