@@ -117,9 +117,27 @@
   });
 
   // Первый экран собирается после загрузки шрифтов (не дольше 0,6 с ожидания)
+
+  // Голубые плашки в «Обо мне»: подгоняем под реальную ширину выделенных слов.
+  // На Mac (Helvetica Neue) получается ровно как в Figma, на Windows — по запасному шрифту.
+  function fitHL() {
+    document.querySelectorAll('.about').forEach(function (sec) {
+      var rs = sec.querySelectorAll('.hlr'), hs = sec.querySelectorAll('.hl');
+      for (var i = 0; i < rs.length && i < hs.length; i++) {
+        var r = rs[i], box = hs[i].getClientRects()[0], par = r.offsetParent;
+        if (!box || !par) continue;
+        var pl = parseFloat(r.getAttribute('data-pl')) || 0, pr = parseFloat(r.getAttribute('data-pr')) || 0;
+        var x = (box.left - par.getBoundingClientRect().left - par.clientLeft) / unit - pl;
+        var w = box.width / unit + pl + pr;
+        r.style.left = 'calc(' + x.toFixed(2) + ' * var(--u))';
+        r.style.width = 'calc(' + w.toFixed(2) + ' * var(--u))';
+      }
+    });
+  }
   function intro() { document.querySelectorAll('.rv-intro').forEach(function (h) { h.classList.add('in'); }); }
   var fontsReady = document.fonts && document.fonts.ready ? document.fonts.ready : Promise.resolve();
-  Promise.race([fontsReady, new Promise(function (r) { setTimeout(r, 600); })]).then(function () { requestAnimationFrame(intro); });
+  Promise.race([fontsReady, new Promise(function (r) { setTimeout(r, 600); })]).then(function () { fitHL(); requestAnimationFrame(intro); });
+  fontsReady.then(fitHL);
 
   var ticking = false;
   function render() {
@@ -129,10 +147,11 @@
     renderCases(tree, H);
   }
   function onScroll() { if (!ticking) { ticking = true; requestAnimationFrame(render); } }
-  function onResize() { setUnit(); render(); }
+  function onResize() { if (setUnit()) fitHL(); render(); }
 
   window.addEventListener('scroll', onScroll, { passive: true });
   window.addEventListener('resize', onResize);
   setUnit();
+  fitHL();
   render();
 })();
