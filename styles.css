@@ -70,7 +70,7 @@ img { display: block; }
 .d .hero .hero-nav a:nth-child(3) { left: calc(498 * var(--u)); }
 .d .hero .hero-nav a:nth-child(4) { left: calc(732 * var(--u)); }
 .d .hero .hero-nav a:nth-child(5) { left: calc(966 * var(--u)); }
-.d .hero .photo { z-index: 1; left: calc(60 * var(--u)); top: calc(73 * var(--u)); width: calc(327 * var(--u)); height: calc(365 * var(--u)); border: calc(1 * var(--u)) solid var(--blue); transform: rotate(10deg); transform-origin: top left; }
+.d .hero .photo { z-index: 1; left: calc(60 * var(--u)); top: calc(118 * var(--u)); width: calc(327 * var(--u)); height: calc(365 * var(--u)); border: calc(1 * var(--u)) solid var(--blue); transform: rotate(10deg); transform-origin: top left; }
 .d .hero .photo img { inset: 0; width: 100%; height: 100%; object-fit: cover; }
 .d .hero .t1 { z-index: 2; left: calc(498 * var(--u)); top: calc(238 * var(--u)); font-size: calc(100 * var(--u)); letter-spacing: calc(-2 * var(--u)); line-height: .88; color: var(--blue); }
 .d .hero .t2 { z-index: 2; left: calc(498 * var(--u)); top: calc(335 * var(--u)); font-size: calc(40 * var(--u)); letter-spacing: calc(-0.8 * var(--u)); line-height: 1.15; color: var(--white); }
