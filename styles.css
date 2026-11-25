@@ -75,7 +75,7 @@ img { display: block; }
 .d .hero .t1 { z-index: 2; left: calc(498 * var(--u)); top: calc(238 * var(--u)); font-size: calc(100 * var(--u)); letter-spacing: calc(-2 * var(--u)); line-height: .88; color: var(--blue); }
 .d .hero .t2 { z-index: 2; left: calc(498 * var(--u)); top: calc(335 * var(--u)); font-size: calc(40 * var(--u)); letter-spacing: calc(-0.8 * var(--u)); line-height: 1.15; color: var(--white); }
 .btn { display: block; position: absolute; background: var(--blue); cursor: pointer; }
-.btn .in { position: absolute; border: solid #000; }
+.btn .in { position: absolute; border: solid #3D2D2E; }
 .btn .lbl { position: absolute; left: 0; right: 0; text-align: center; color: #3D2D2E; white-space: nowrap; line-height: 1.06; }
 .d .hero .btn { z-index: 3; left: calc(498 * var(--u)); top: calc(408 * var(--u)); width: calc(169 * var(--u)); height: calc(51 * var(--u)); }
 .d .hero .btn .in { left: calc(3 * var(--u)); top: calc(3 * var(--u)); width: calc(163 * var(--u)); height: calc(45 * var(--u)); border-width: calc(1 * var(--u)); }
@@ -252,7 +252,7 @@ img { display: block; }
 :root { --ease-out: cubic-bezier(.22,1,.36,1); --ease-draw: cubic-bezier(.65,0,.35,1); }
 
 /* Главная фотография мягко въезжает сбоку, сохраняя финальный поворот макета. */
-.d .hero .photo, .m .hero .photo { animation: hero-photo-in 1.1s var(--ease-out) both; }
+.d .hero .photo, .m .hero .photo { animation: hero-photo-in 1.5s var(--ease-out) both; }
 @keyframes hero-photo-in {
   from { opacity: 0; transform: translateX(-42px) rotate(10deg); }
   to { opacity: 1; transform: translateX(0) rotate(10deg); }
