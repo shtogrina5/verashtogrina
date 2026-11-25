@@ -64,7 +64,7 @@ img { display: block; }
 .hero-nav { position: absolute; z-index: 4; color: var(--white); pointer-events: none; }
 .hero-nav a { position: absolute; white-space: nowrap; transition: opacity .2s ease; pointer-events: auto; }
 .hero-nav a:hover { opacity: .7; }
-.d .hero .hero-nav { left: calc(30 * var(--u)); top: calc(39 * var(--u)); right: auto; bottom: auto; display: flex; gap: calc(90 * var(--u)); align-items: flex-start; font-size: calc(20 * var(--u)); letter-spacing: calc(-0.2 * var(--u)); line-height: 1.15; }
+.d .hero .hero-nav { left: 50%; top: calc(39 * var(--u)); right: auto; bottom: auto; width: max-content; display: flex; gap: calc(90 * var(--u)); align-items: flex-start; transform: translateX(-50%); font-size: calc(20 * var(--u)); letter-spacing: calc(-0.2 * var(--u)); line-height: 1.15; }
 .d .hero .hero-nav a { position: static; }
 .d .hero .photo { z-index: 1; left: calc(60 * var(--u)); top: calc(118 * var(--u)); width: calc(327 * var(--u)); height: calc(365 * var(--u)); border: calc(1 * var(--u)) solid var(--blue); transform: rotate(10deg); transform-origin: top left; }
 .d .hero .photo img { inset: 0; width: 100%; height: 100%; object-fit: cover; }
