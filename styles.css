@@ -154,6 +154,7 @@ img { display: block; }
 .case-dialog[open] .case-print { animation: case-photo-in .65s var(--ease-out) both; }
 .case-dialog[open] .case-print:nth-of-type(1) { animation-delay: .16s; }
 .case-dialog[open] .case-print:nth-of-type(2) { animation-delay: .36s; }
+.d .case-dialog .case-print:nth-of-type(2) { margin-top: calc(6 * var(--s)); margin-left: calc(40 * var(--s)); }
 @keyframes case-photo-in {
   from { opacity: 0; transform: translateY(calc(28 * var(--s))) scale(.94) rotate(var(--angle)); }
   to { opacity: 1; transform: translateY(0) scale(1) rotate(var(--angle)); }
@@ -192,7 +193,7 @@ img { display: block; }
 .d .foot .big { left: calc(30 * var(--u)); top: calc(234 * var(--u)); width: calc(1158 * var(--u)); font-size: calc(140 * var(--u)); letter-spacing: calc(-5.6 * var(--u)); line-height: 0.84; color: var(--white); }
 
 /* ============ MOBILE ============ */
-.m .hero { height: calc(450 * var(--u)); background: var(--dark); }
+.m .hero { z-index: 2; height: calc(450 * var(--u)); overflow: visible; background: var(--dark); }
 .m .hero .hero-nav { inset: 0; top: calc(18 * var(--u)); font-size: calc(10 * var(--u)); letter-spacing: calc(-0.1 * var(--u)); line-height: 1.15; }
 .m .hero .hero-nav a:nth-child(1) { left: calc(37 * var(--u)); }
 .m .hero .hero-nav a:nth-child(2) { left: calc(128 * var(--u)); }
@@ -207,7 +208,7 @@ img { display: block; }
 .m .hero .btn .in { left: calc(2 * var(--u)); top: calc(2 * var(--u)); width: calc(103 * var(--u)); height: calc(28 * var(--u)); border-width: calc(0.7 * var(--u)); }
 .m .hero .btn .lbl { top: calc(9.5 * var(--u)); font-size: calc(10 * var(--u)); letter-spacing: calc(-0.2 * var(--u)); }
 
-.m .about { height: calc(429 * var(--u)); background: var(--dark); }
+.m .about { z-index: 1; height: calc(429 * var(--u)); background: var(--dark); }
 .m .about .bgw { left: 0; top: calc(-70 * var(--u)); width: calc(320 * var(--u)); height: calc(569 * var(--u)); }
 .m .about .bgw .rot { position: absolute; left: 50%; top: 50%; width: calc(569 * var(--u)); height: calc(320 * var(--u)); transform: translate(-50%, -50%) rotate(-90deg); }
 .m .about .txt { font-size: calc(10 * var(--u)); letter-spacing: calc(-0.2 * var(--u)); line-height: 1.15; color: var(--white); }
@@ -251,30 +252,14 @@ img { display: block; }
 /* Маска строк: заголовки выезжают снизу из-за невидимого края (запас — чтобы не резались хвосты курсива) */
 .ml { display: block; overflow: hidden; padding: .1em .2em .22em .15em; margin: -.1em -.2em -.22em -.15em; }
 .mi { display: block; }
-.js .rv .mi, .js .rv-intro .mi { transform: translateY(115%); transition: transform .9s var(--ease-out) calc(var(--i, 0) * 90ms + var(--rd, 0ms)); }
-.js .rv.in .mi, .js .rv-intro.in .mi { transform: none; }
+.js .rv .mi { transform: translateY(115%); transition: transform .9s var(--ease-out) calc(var(--i, 0) * 90ms + var(--rd, 0ms)); }
+.js .rv.in .mi { transform: none; }
 
 /* ★ Голубые плашки «прокрашиваются» маркером по порядку чтения */
 .js .about .hlr { transform: scaleX(0); transform-origin: left; transition: transform .7s var(--ease-draw) var(--hd, 0ms); }
 .js .about.in .hlr { transform: none; }
 .js .about .hl { color: var(--white); transition: color .3s ease calc(var(--hd, 0ms) + 250ms); }
 .js .about.in .hl { color: var(--dark); }
-
-/* Первый экран: линии прорисовываются, фото проявляется шторкой, заголовок по маске, кнопка последней */
-.js .hero .vline { transform: scaleY(0); transform-origin: top; transition: transform .6s var(--ease-draw); }
-.js .hero .hline { transform: scaleX(0); transform-origin: left; transition: transform .6s var(--ease-draw) .1s; }
-.js .hero .photo img { clip-path: inset(0 0 100% 0); transition: clip-path .9s var(--ease-out) .25s; }
-.js .hero .hero-nav { opacity: 0; transition: opacity .6s ease .3s; }
-.js .hero .t1 { --rd: 400ms; } .js .hero .t2 { --rd: 430ms; }
-.js .rv-intro .mi { transform: translateY(-115%); }
-.js .rv-intro.in .mi { transform: none; }
-.js .hero .btn { opacity: 0; transform: translateY(calc(-12 * var(--u))); transition: opacity .6s ease .8s, transform .6s var(--ease-out) .8s; }
-.js .hero.in .vline, .js .hero.in .hline { transform: none; }
-.js .hero.in .photo img { clip-path: inset(0); }
-.js .hero.in .hero-nav { opacity: 1; }
-.js .hero.in .btn { opacity: 1; transform: none; }
-.js .m .hero .btn { transform: translateY(calc(-8 * var(--u))); }
-.js .m .hero.in .btn { transform: none; }
 
 /* Кнопка «Написать мне»: без эффектов при наведении */
 

@@ -167,9 +167,8 @@
       }
     });
   }
-  function intro() { document.querySelectorAll('.rv-intro').forEach(function (h) { h.classList.add('in'); }); }
   var fontsReady = document.fonts && document.fonts.ready ? document.fonts.ready : Promise.resolve();
-  Promise.race([fontsReady, new Promise(function (r) { setTimeout(r, 600); })]).then(function () { fitHL(); requestAnimationFrame(intro); });
+  Promise.race([fontsReady, new Promise(function (r) { setTimeout(r, 600); })]).then(fitHL);
   fontsReady.then(fitHL);
 
   var ticking = false;
