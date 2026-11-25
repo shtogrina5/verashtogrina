@@ -43,46 +43,79 @@
     }
   }
 
-  // ---------- Кейсы: раскрываются, когда доходят до середины экрана; закрываются, когда наезжает следующий ----------
-  function renderCases(tree, H) {
-    var cs = tree.querySelectorAll('.case');
-    var tops = [];
-    for (var i = 0; i < cs.length; i++) tops.push(cs[i].getBoundingClientRect().top);
-    for (var j = 0; j < cs.length; j++) {
-      var next = j + 1 < cs.length ? tops[j + 1] : Infinity;
-      var open = tops[j] < H * 0.55 && next > H * 0.4;
-      if (cs[j].classList.contains('open') !== open) cs[j].classList.toggle('open', open);
-      cs[j]._visible = tops[j] < H && next > 0;
+  var activeDialog = null;
+  var opener = null;
+  var visibleGalleries = new Set();
+  var photoTimers = new Map();
+
+  function advancePhoto(gallery) {
+    var photos = gallery.querySelectorAll('img');
+    if (photos.length < 2) return;
+    var current = gallery.querySelector('.on');
+    var next = current.nextElementSibling || photos[0];
+    if (next.dataset.cycleSrc) {
+      next.src = next.dataset.cycleSrc;
+      delete next.dataset.cycleSrc;
+    }
+    current.classList.remove('on');
+    next.classList.add('on');
+  }
+
+  function updateGallery(gallery) {
+    var timer = photoTimers.get(gallery);
+    var shouldPlay = visibleGalleries.has(gallery) && !document.hidden && !mqReduce.matches && !activeDialog;
+    if (shouldPlay && !timer) {
+      photoTimers.set(gallery, setInterval(function () { advancePhoto(gallery); }, 3000));
+    } else if (!shouldPlay && timer) {
+      clearInterval(timer);
+      photoTimers.delete(gallery);
     }
   }
 
-  // ---------- Смена фото в кейсах: каждый слот раз в 3 с, нижний со сдвигом 1,5 с; только кейсы на экране ----------
-  var tick = 0;
-  function showPhoto(slot, n) {
-    var imgs = slot.querySelectorAll('img');
-    var cur = slot.querySelector('img.on');
-    var nxt = imgs[n % imgs.length];
-    if (!nxt || nxt === cur) return;
-    if (cur) { cur.classList.remove('on'); cur.classList.add('was'); }
-    nxt.classList.remove('was');
-    nxt.classList.add('on');
-    if (!nxt.alt && cur) { nxt.alt = cur.alt; cur.alt = ''; }
-    setTimeout(function () { if (cur && !cur.classList.contains('on')) cur.classList.remove('was'); }, 1000);
-  }
-  setInterval(function () {
-    if (document.hidden || mqReduce.matches) return;
-    tick++;
-    var slotIdx = tick % 2;                  // по очереди: верхний, через 1,5 с нижний
-    activeTree().querySelectorAll('.case').forEach(function (c) {
-      if (!c._visible) return;
-      var slots = c.querySelectorAll('.ph');
-      var slot = slots[slotIdx];
-      if (!slot) return;
-      c._step = c._step || [0, 0];
-      c._step[slotIdx] += 2;
-      showPhoto(slot, slotIdx + c._step[slotIdx]);
+  function updateGalleries() { visibleGalleries.forEach(updateGallery); }
+
+  var galleryObserver = new IntersectionObserver(function (entries) {
+    entries.forEach(function (entry) {
+      if (entry.isIntersecting) visibleGalleries.add(entry.target);
+      else visibleGalleries.delete(entry.target);
+      updateGallery(entry.target);
     });
-  }, 1500);
+  });
+  document.querySelectorAll('.case-gallery').forEach(function (gallery) { galleryObserver.observe(gallery); });
+
+  document.querySelectorAll('.case-open').forEach(function (button) {
+    button.addEventListener('click', function () {
+      var dialog = document.getElementById(button.getAttribute('aria-controls'));
+      opener = button;
+      activeDialog = dialog;
+      dialog.showModal();
+      dialog.scrollTop = 0;
+      root.classList.add('case-dialog-open');
+      updateGalleries();
+    });
+  });
+
+  document.querySelectorAll('.case-dialog').forEach(function (dialog) {
+    dialog.querySelector('.case-close').addEventListener('click', function () {
+      dialog.close();
+    });
+    dialog.addEventListener('click', function (event) {
+      if (event.target === dialog) dialog.close();
+    });
+    dialog.addEventListener('close', function () {
+      root.classList.remove('case-dialog-open');
+      activeDialog = null;
+      if (opener && opener.getClientRects().length) opener.focus({ preventScroll: true });
+      opener = null;
+      updateGalleries();
+    });
+  });
+
+  mqMobile.addEventListener('change', function () {
+    if (activeDialog) activeDialog.close();
+  });
+  mqReduce.addEventListener('change', updateGalleries);
+  document.addEventListener('visibilitychange', updateGalleries);
 
   // ---------- Появления: каждый блок проигрывается один раз, когда въезжает в экран ----------
   if (mqReduce.matches) root.classList.add('rm');
@@ -144,7 +177,6 @@
     ticking = false;
     var tree = activeTree(), H = vh();
     renderHelp(tree, H);
-    renderCases(tree, H);
   }
   function onScroll() { if (!ticking) { ticking = true; requestAnimationFrame(render); } }
   function onResize() { if (setUnit()) fitHL(); render(); }
