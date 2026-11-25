@@ -64,12 +64,8 @@ img { display: block; }
 .hero-nav { position: absolute; z-index: 4; color: var(--white); pointer-events: none; }
 .hero-nav a { position: absolute; white-space: nowrap; transition: opacity .2s ease; pointer-events: auto; }
 .hero-nav a:hover { opacity: .7; }
-.d .hero .hero-nav { inset: 0; top: calc(39 * var(--u)); font-size: calc(20 * var(--u)); letter-spacing: calc(-0.2 * var(--u)); line-height: 1.15; }
-.d .hero .hero-nav a:nth-child(1) { left: calc(30 * var(--u)); }
-.d .hero .hero-nav a:nth-child(2) { left: calc(264 * var(--u)); }
-.d .hero .hero-nav a:nth-child(3) { left: calc(498 * var(--u)); }
-.d .hero .hero-nav a:nth-child(4) { left: calc(732 * var(--u)); }
-.d .hero .hero-nav a:nth-child(5) { left: calc(966 * var(--u)); }
+.d .hero .hero-nav { left: calc(30 * var(--u)); top: calc(39 * var(--u)); right: auto; bottom: auto; display: flex; gap: calc(90 * var(--u)); align-items: flex-start; font-size: calc(20 * var(--u)); letter-spacing: calc(-0.2 * var(--u)); line-height: 1.15; }
+.d .hero .hero-nav a { position: static; }
 .d .hero .photo { z-index: 1; left: calc(60 * var(--u)); top: calc(118 * var(--u)); width: calc(327 * var(--u)); height: calc(365 * var(--u)); border: calc(1 * var(--u)) solid var(--blue); transform: rotate(10deg); transform-origin: top left; }
 .d .hero .photo img { inset: 0; width: 100%; height: 100%; object-fit: cover; }
 .d .hero .t1 { z-index: 2; left: calc(498 * var(--u)); top: calc(238 * var(--u)); font-size: calc(100 * var(--u)); letter-spacing: calc(-2 * var(--u)); line-height: .88; color: var(--blue); }
